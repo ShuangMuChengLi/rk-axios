@@ -10,7 +10,12 @@ module.exports = {
     library: "RkAxios",
     libraryTarget: 'umd'
   },
-
+  externals : {
+    'axios': 'axios',
+    'rk-cookie': 'rk-cookie',
+    'querystring': 'querystring',
+    'rk-util': 'rk-util'
+  },
   // Enable sourcemaps for debugging webpack's output.
   devtool: 'source-map',
   mode: 'development',

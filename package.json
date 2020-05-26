@@ -1,6 +1,6 @@
 {
     "name": "rk-axios",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "private": false,
     "main": "dist/index.js",
     "types": "dist/src/index.d.ts",
@@ -21,13 +21,10 @@
     "dependencies": {
         "@types/axios": "^0.14.0",
         "@types/node": "^14.0.5",
-        "@types/qs": "^6.9.3",
         "axios": "^0.19.2",
-        "qs": "^6.9.4",
         "querystring": "^0.2.0",
         "rk-cookie": "^1.0.3",
-        "rk-util": "^0.0.5",
-        "url": "^0.11.0"
+        "rk-util": "^0.0.5"
     },
     "devDependencies": {
         "@types/jest": "^25.2.3",
