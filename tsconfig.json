@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "dist",
+    "types" : ["jest","node"],
+    "lib": ["es2015","dom"]
+  },
+  "include": [
+    "demo",
+    "src",
+    "js-test",
+    "test"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}
