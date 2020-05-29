@@ -1,7 +1,8 @@
 import http, {AxiosRequestConfig} from 'axios'
 import {getCookie} from 'rk-cookie'
-import { parse } from 'querystring'
+import { parse, stringify as qsToString } from 'querystring'
 import rkUtil from 'rk-util'
+import * as _ from 'lodash'
 const { noNoneGetParams } = rkUtil
 interface ErrorCallback {
   (e: Error): void;
@@ -43,12 +44,10 @@ function addQueryToUrl (url, query): string {
   if (typeof query === 'string') {
     query = parse(query)
   }
-  for (const key in query) {
-    if(!Object.prototype.hasOwnProperty.call(query, key))continue
-
-    console.log(urlObj.searchParams)
-    urlObj.searchParams.set(key, query[key])
-  }
+  const search = urlObj.search
+  const searchObj = parse(search)
+  _.merge(searchObj, query)
+  urlObj.search = qsToString(searchObj)
   return urlObj.toString()
 }
 /**

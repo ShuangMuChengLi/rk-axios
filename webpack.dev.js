@@ -40,8 +40,7 @@ module.exports = {
           }
         ]
       },
-      {test: /\.map$/, enforce: 'pre', loader: 'source-map-loader'},
-      {test: /\.tsx?$/, loader: 'ts-loader'}
+      {test: /\.tsx?$/, use: "babel-loader"}
     ]
   },
   plugins: [

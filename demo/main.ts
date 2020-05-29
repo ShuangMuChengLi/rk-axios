@@ -24,5 +24,6 @@ rkAxios.setBeforeRequire(getOption)
 rkAxios.get('https://www.linchaoqun.com/html/cms/content.jsp',{
   menu : 'index',
   id: '02b84ae2-b29e-46e6-8b06-2db5c99d3772'
-}).then(()=>{
+}).then((res)=>{
+  console.log(res)
 })
