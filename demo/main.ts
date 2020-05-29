@@ -1,4 +1,4 @@
-import rkAxios, {BeforeRequireReturn} from '../src/index'
+import rkAxios, {BeforeRequireReturn} from '../dist/index'
 import {getCookie, setCookie} from 'rk-cookie'
 import {AxiosRequestConfig} from "axios"
 setCookie('token', 'test token')

@@ -12,7 +12,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "webpack --config webpack.production.js",
+    "build": "webpack --config webpack.production.js && tsc --emitDeclarationOnly",
     "dev": "webpack-dev-server --config webpack.dev.js",
     "lint": "eslint --fix --ext ts,js src test demo",
     "test": "jest",
