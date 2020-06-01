@@ -46,7 +46,6 @@ function addQueryToUrl (url, query): string {
   for (const key in query) {
     if(!Object.prototype.hasOwnProperty.call(query, key))continue
 
-    console.log(urlObj.searchParams)
     urlObj.searchParams.set(key, query[key])
   }
   return urlObj.toString()
