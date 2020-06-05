@@ -114,8 +114,12 @@ async function dataMethod(type, url, data, option): Promise<void> {
   let axiosOption
   if(beforeRequire){
     const result = beforeRequire(option, data)
-    data = result?.data || data
-    axiosOption = result?.option
+    if(result && result.data){
+      data = result.data
+    }
+    if(result && result.option){
+      axiosOption = result.option
+    }
   }
 
   if(!axiosOption){
@@ -146,8 +150,12 @@ async function urlMethod(type, url, data, option): Promise<void> {
   let axiosOption
   if(beforeRequire){
     const result = beforeRequire(option, data)
-    data = result?.data || data
-    axiosOption = result?.option
+    if(result && result.data){
+      data = result.data
+    }
+    if(result && result.option){
+      axiosOption = result.option
+    }
   }
 
   if(!axiosOption){
