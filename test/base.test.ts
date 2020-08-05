@@ -32,4 +32,17 @@ describe('rkAxios.get', () => {
     })
     rkAxios.get('https://1')
   })
+  test('delete', async () => {
+    return await rkAxios.delete(
+        'http://218.207.195.169:8762/api-super-map/markInfo/deleteMarkInfo',
+        {
+          id: '2601120061100000011',
+          recordVersion: 0
+        }
+    ).then((res)=>{
+      return res
+    }).catch((e)=>{
+      throw e
+    })
+  })
 })

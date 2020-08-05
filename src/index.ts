@@ -13,8 +13,22 @@ export interface BeforeRequireReturn {
 interface BeforeRequire {
   (option?: AxiosRequestConfig, data?: string | JSON): BeforeRequireReturn;
 }
+
 let errorCallback: ErrorCallback
 let beforeRequire: BeforeRequire
+
+let deleteData: string | JSON
+
+http.interceptors.request.use(config => {
+  if (config.method === 'get' || config.method === 'delete') {
+    //  给data赋值以绕过if判断
+    config.data = deleteData
+    config.headers['Content-Type'] = 'application/json'
+  }
+
+  return config
+}, err => Promise.reject(err))
+
 const util = {
   /**
    * 处理异常  登录过期  跳转登录页
@@ -172,6 +186,13 @@ async function urlMethod(type, url, data, option): Promise<void> {
   })
 }
 export const rkAxios = {
+  /**
+   * 设置get,delete 请求参数放在头部且设置Content-Type: application/json
+   *
+   * */
+  setDeleteData(data: string | JSON): void{
+    deleteData = data
+  },
   /**
    * 错误请求时回调
    * @param callback ErrorCallback: (e: Error): void;
