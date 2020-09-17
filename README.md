@@ -83,6 +83,11 @@ export declare const rkAxios: {
      * @returns {Promise<*>}
      */
     delete: (url: any, data?: any, option?: any) => Promise<void>;
+    /**
+     * 终止请求
+     *
+     * */
+    cancelSource: (url: any, msg?: string) => void;
 };
 /**
  * axios中JSON提交的config配置

@@ -3,6 +3,8 @@ import {getCookie} from 'rk-cookie'
 import { parse } from 'querystring'
 import rkUtil from 'rk-util'
 const { noNoneGetParams } = rkUtil
+const cancelTokenSourceMap = {}
+const CancelToken = http.CancelToken
 interface ErrorCallback {
   (e: Error): void;
 }
@@ -136,11 +138,16 @@ async function dataMethod(type, url, data, option): Promise<void> {
     axiosOption = getOption(option) // 添加token
   }
 
+  const source = CancelToken.source()
+  axiosOption['cancelToken'] = source.token //添加取消请求
+  cancelTokenSourceMap[url] = source // 暂存取消请求的source
+
   let params = null
   if (data) {
     params = getParams(data, option)// 重构数据
   }
   return await http[type](url, params, axiosOption).then((res) => {
+    delete cancelTokenSourceMap[url]
     return res
   }).catch((e) => {
     util.handleError(e)
@@ -167,6 +174,10 @@ async function urlMethod(type, url, data, option): Promise<void> {
   if(!axiosOption){
     axiosOption = getOption(option) // 添加token
   }
+
+  const source = CancelToken.source()
+  axiosOption['cancelToken'] = source.token //添加取消请求
+  cancelTokenSourceMap[url] = source // 暂存取消请求的source
 
   if (data) {
     let params = null
@@ -251,7 +262,22 @@ export const rkAxios = {
    * @param option http选项
    * @returns {Promise<*>}
    */
-  delete: async (url, data?, option?): Promise<void> => urlMethod('delete', url, data, option)
+  delete: async (url, data?, option?): Promise<void> => urlMethod('delete', url, data, option),
+  /**
+   * 终止请求
+   *
+   * */
+  cancelSource: (url, msg = '取消'): void =>{
+    if(!cancelTokenSourceMap) return
+
+    if(url && cancelTokenSourceMap[url]){
+      cancelTokenSourceMap[url].cancel(msg)
+    }
+
+    for(const key in cancelTokenSourceMap){
+      cancelTokenSourceMap[key].cancel(msg)
+    }
+  }
 
 }
 

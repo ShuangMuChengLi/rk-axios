@@ -1,4 +1,4 @@
-import rkAxios, {BeforeRequireReturn} from '../dist/index'
+import rkAxios, {BeforeRequireReturn} from '../src/index'
 import {getCookie, setCookie} from 'rk-cookie'
 import {AxiosRequestConfig} from "axios"
 setCookie('token', 'test token')
@@ -27,3 +27,4 @@ rkAxios.get('https://www.linchaoqun.com/html/cms/content.jsp',{
 }).then((res)=>{
   console.log(res)
 })
+rkAxios.cancelSource('https://www.linchaoqun.com/html/cms/content.jsp')
