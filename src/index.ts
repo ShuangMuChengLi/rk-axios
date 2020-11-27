@@ -175,9 +175,12 @@ async function urlMethod(type, url, data, option): Promise<void> {
     axiosOption = getOption(option) // 添加token
   }
 
-  const source = CancelToken.source()
-  axiosOption['cancelToken'] = source.token //添加取消请求
-  cancelTokenSourceMap[url] = source // 暂存取消请求的source
+  // 彻底对axiosOption赋值之后才开始此项操作
+  if(axiosOption){
+    const source = CancelToken.source()
+    axiosOption['cancelToken'] = source.token //添加取消请求
+    cancelTokenSourceMap[url] = source // 暂存取消请求的source
+  }
 
   if (data) {
     let params = null
