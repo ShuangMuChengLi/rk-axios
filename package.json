@@ -19,7 +19,7 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "querystring": "^0.2.0",
     "rk-cookie": "^1.0.3",
     "rk-util": "^0.0.5"
